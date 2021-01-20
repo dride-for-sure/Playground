@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlaygroundTests {
 
@@ -9,7 +9,7 @@ public class PlaygroundTests {
 	String testCaseStringEmpty = "This is long string";
 	int length = 10;
 
-	assertFalse( Playground.stringLengthGreaterThen( testCaseStringEmpty, length ) );
+	assertTrue( Playground.stringLengthGreaterThen( testCaseStringEmpty, length ) );
  }
 
  @Test
