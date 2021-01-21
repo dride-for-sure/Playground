@@ -9,4 +9,16 @@ public class Thursday {
 	 return false;
 	}
  }
+
+ public static boolean alarmHandler (int number, String alarmStatus) {
+	switch ( alarmStatus ) {
+	 case "red":
+		return false;
+	 case "yellow":
+		return number <= 30;
+	 case "green":
+		return number <= 60;
+	}
+	return true;
+ }
 }
