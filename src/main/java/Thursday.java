@@ -3,11 +3,7 @@ public class Thursday {
  }
 
  public static boolean checkPeople (int people) {
-	if ( people > 30 ) {
-	 return true;
-	} else {
-	 return false;
-	}
+	return people > 30;
  }
 
  public static boolean alarmHandler (int number, String alarmStatus) {
