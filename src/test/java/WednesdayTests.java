@@ -1,15 +1,15 @@
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PlaygroundTests {
-
+public class WednesdayTests {
  @Test
  public void stringLengthGreaterThenTest () {
 	String testCaseStringEmpty = "This is long string";
 	int length = 10;
 
-	assertTrue( Playground.stringLengthGreaterThen( testCaseStringEmpty, length ) );
+	assertTrue( Wednesday.stringLengthGreaterThen( testCaseStringEmpty, length ) );
  }
 
  @Test
@@ -17,6 +17,6 @@ public class PlaygroundTests {
 	int num1 = 4;
 	int num2 = 6;
 
-	assertEquals( 10, Playground.sum( num1, num2 ) );
+	assertEquals( 10, Wednesday.sum( num1, num2 ) );
  }
 }
