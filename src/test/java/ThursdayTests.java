@@ -3,6 +3,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
@@ -55,5 +56,14 @@ public class ThursdayTests {
 					Arguments.of( 1, 1 ),
 					Arguments.of( 5, 120 )
 	);
+ }
+
+ // Student Array
+ // Value Source
+ @DisplayName ("Check student array")
+ @ParameterizedTest (name = "Länge: {1}")
+ @ValueSource (ints = { 1, 2, 3, 4 })
+ void studentArrayTest (int length) {
+	assertEquals( length, Thursday.studentArray( length ).length );
  }
 }

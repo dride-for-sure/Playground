@@ -1,6 +1,9 @@
+import java.lang.reflect.Array;
+
 public class Thursday {
 
  public static void main (String[] args) {
+	studentArray( 5 );
  }
 
  public static boolean checkPeople (int people) {
@@ -22,5 +25,15 @@ public class Thursday {
 	} else {
 	 return ( number * factorial( number - 1 ) );
 	}
+ }
+
+ public static String[] studentArray (int length) {
+	String[] students = new String[ length ];
+
+	for ( int i = 0; i < students.length; i++ ) {
+	 students[ i ] = "Students" + ( i + 1 );
+	}
+
+	return students;
  }
 }
