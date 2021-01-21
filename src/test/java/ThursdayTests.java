@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ThursdayTests {
 
+ // Check People
  // CSV Source
  @DisplayName ("Check the People in the room")
  @ParameterizedTest (name = "{0} people entered and it returns {1}")
@@ -21,6 +22,7 @@ public class ThursdayTests {
 	assertEquals( status, Thursday.checkPeople( numbers ) );
  }
 
+ // AlarmHandler
  // Method Source
  @DisplayName ("Check return value for people + alarmStatus")
  @ParameterizedTest (name = "{0} people entered at {1} and it returns {2}")
@@ -38,6 +40,7 @@ public class ThursdayTests {
 	);
  }
 
+ // Factorial
  // Method Source
  @DisplayName ("Check factorial")
  @ParameterizedTest (name = "{0}! is {1}")
