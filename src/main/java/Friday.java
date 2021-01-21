@@ -1,6 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Friday {
@@ -45,10 +42,10 @@ public class Friday {
 					&& passwordLength( password, minLength );
  }
 
- public static Boolean passwordBatchValidation (String[] passwords, int minLength, int minNumbersCount, int minUpperLowerCount) {
+ public static Boolean passwordBatchValidation (List<String> passwords, int minLength, int minNumbersCount, int minUpperLowerCount) {
 	Boolean boolToggle = false;
-	for ( int i = 0; i < passwords.length; i++ ) {
-	 boolToggle = passwordValidation( passwords[ i ], minLength, minNumbersCount, minUpperLowerCount );
+	for ( int i = 0; i < passwords.size(); i++ ) {
+	 boolToggle = passwordValidation( passwords.get( i ), minLength, minNumbersCount, minUpperLowerCount );
 	}
 	return boolToggle;
  }

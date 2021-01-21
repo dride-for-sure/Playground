@@ -3,6 +3,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -86,25 +88,25 @@ public class FridayTests {
  @DisplayName ("PasswordBatchValidation")
  @ParameterizedTest
  @MethodSource ("passwordBatchValidationList")
- void passwordBatchValidationTest (String[] passwords, int minLength, int minNumbersCount, int minUpperLowerCount, boolean expected) {
+ void passwordBatchValidationTest (List<String> passwords, int minLength, int minNumbersCount, int minUpperLowerCount, boolean expected) {
 	assertEquals( expected, Friday.passwordBatchValidation( passwords, minLength, minNumbersCount, minUpperLowerCount ) );
  }
 
  static Stream<Arguments> passwordBatchValidationList () {
 	return Stream.of(
 					Arguments.of(
-									(Object) new String[]{
+									Arrays.asList(
 													"ÑèÒmígÒSPpÅ¢@_£Ê²(ÀåA",
 													"23paisAkeBajdkW@_£Ê²(ÀåA",
 													"Ì^åÐRw[(fÅ¡Ø®jÊ1s\\\\qÜ"
-									}, 20, 0, 2, true ),
+									), 20, 0, 2, true ),
 					Arguments.of(
-									(Object) new String[]{
+									Arrays.asList(
 													"~QB÷bzìDì¹loßÁ¢Ø/q$",
 													"                    ",
 													" ",
 													""
-									}, 20, 1, 1, false )
+									), 20, 1, 1, false )
 	);
  }
 }
