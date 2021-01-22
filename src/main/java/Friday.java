@@ -2,9 +2,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Friday {
@@ -43,8 +45,9 @@ public class Friday {
 
  public static boolean passwordBlacklist (String password) {
 	try {
+	 String encodedPassword = URLEncoder.encode( password, StandardCharsets.UTF_8.toString() );
 	 HttpRequest request = HttpRequest.newBuilder()
-					 .uri( URI.create( "https://wordsapiv1.p.rapidapi.com/words/" + password ) )
+					 .uri( URI.create( "https://wordsapiv1.p.rapidapi.com/words/" + encodedPassword ) )
 					 .header( "x-rapidapi-key", "d5e45ae827msh05bf65de7239771p1fccbfjsn93ccbace0628" )
 					 .header( "x-rapidapi-host", "wordsapiv1.p.rapidapi.com" )
 					 .method( "GET", HttpRequest.BodyPublishers.noBody() )

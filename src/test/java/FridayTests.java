@@ -94,9 +94,11 @@ public class FridayTests {
 
  static Stream<Arguments> passwordBlackListValidationList () {
 	return Stream.of(
+					Arguments.of( "Ì^åÐRw[(fÅ¡ØjÊ1sqÜ", true ),
 					Arguments.of( "ÑèÒmígÒSPpÅ¢@_£Ê²(ÀåA", true ),
 					Arguments.of( "password", false ),
-					Arguments.of( "test", false )
+					Arguments.of( "test", false ),
+					Arguments.of( "", true )
 	);
  }
 
