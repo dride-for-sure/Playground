@@ -11,7 +11,28 @@ import java.util.List;
 
 public class Friday {
 
- public static void main (String[] args) {
+ private static HttpResponse<String> getRapidApi (String uri, String apiKey, String rapidHost) {
+	try {
+	 HttpRequest request = HttpRequest.newBuilder()
+					 .uri( URI.create( uri ) )
+					 .header( "x-rapidapi-key", apiKey )
+					 .header( "x-rapidapi-host", rapidHost )
+					 .method( "GET", HttpRequest.BodyPublishers.noBody() )
+					 .build();
+	 return HttpClient.newHttpClient().send( request, HttpResponse.BodyHandlers.ofString() );
+	} catch ( Exception e ) {
+	 e.printStackTrace();
+	 return null;
+	}
+ }
+
+ private static String encodeURL (String str) {
+	try {
+	 return URLEncoder.encode( str, StandardCharsets.UTF_8.toString() );
+	} catch ( Exception e ) {
+	 e.printStackTrace();
+	}
+	return null;
  }
 
  private static boolean passwordLength (String password, int minLength) {
@@ -43,45 +64,50 @@ public class Friday {
 	return counter >= minCount;
  }
 
- public static boolean passwordBlacklist (String password) {
-	try {
-	 String encodedPassword = URLEncoder.encode( password, StandardCharsets.UTF_8.toString() );
-	 HttpRequest request = HttpRequest.newBuilder()
-					 .uri( URI.create( "https://wordsapiv1.p.rapidapi.com/words/" + encodedPassword ) )
-					 .header( "x-rapidapi-key", "d5e45ae827msh05bf65de7239771p1fccbfjsn93ccbace0628" )
-					 .header( "x-rapidapi-host", "wordsapiv1.p.rapidapi.com" )
-					 .method( "GET", HttpRequest.BodyPublishers.noBody() )
-					 .build();
-	 HttpResponse<String> response = HttpClient.newHttpClient().send( request, HttpResponse.BodyHandlers.ofString() );
-
-	 int statusCode = response.statusCode();
-	 if ( statusCode != 200 ) {
-		return true;
-	 } else {
-		// Access JSON Keys
-		// ObjectMapper objectMapper = new ObjectMapper();
-		// JsonNode jsonNode = objectMapper.readTree( response.body() );
-		// String word = jsonNode.get( "word" ).asText();
-		// System.out.println( word );
-		return false;
-	 }
-	} catch ( Exception e ) {
-	 e.printStackTrace();
-	}
-	return false;
+ private static boolean passwordBlacklist (String password) {
+	String encodedPassword = encodeURL( password );
+	String uri = "https://wordsapiv1.p.rapidapi.com/words/" + encodedPassword;
+	String apiKey = "d5e45ae827msh05bf65de7239771p1fccbfjsn93ccbace0628";
+	String rapidHost = "wordsapiv1.p.rapidapi.com";
+	HttpResponse<String> response = getRapidApi( uri, apiKey, rapidHost );
+	return response.statusCode() != 200;
  }
 
- public static boolean passwordValidation (String password, int minLength, int minNumbersCount, int minUpperLowerCount) {
+ private static boolean passwordIsBoring (String password, int hits) {
+	if ( password.length() == 0 ) {
+	 return true;
+	}
+
+	String encodedPassword = encodeURL( password );
+	String uri = "https://google-search5.p.rapidapi.com/google-serps/?q=" + encodedPassword;
+	String apiKey = "d5e45ae827msh05bf65de7239771p1fccbfjsn93ccbace0628";
+	String rapidHost = "google-search5.p.rapidapi.com";
+	HttpResponse<String> response = getRapidApi( uri, apiKey, rapidHost );
+
+	try {
+	 ObjectMapper objectMapper = new ObjectMapper();
+	 JsonNode jsonNode = objectMapper.readTree( response.body() );
+	 String creditsLeft = jsonNode.get( "data" ).get( "meta" ).get( "credits_left" ).asText();
+	 int convertedNumber = Integer.parseInt( creditsLeft );
+	 return convertedNumber > hits;
+	} catch ( Exception e ) {
+	 e.printStackTrace();
+	 return false;
+	}
+ }
+
+ public static boolean passwordValidation (String password, int minLength, int minNumbersCount, int minUpperLowerCount, int maxGoogleHits) {
 	return passwordIncludesNumbers( password, minNumbersCount )
 					&& passwordIncludesUpperLowerCases( password, minUpperLowerCount )
 					&& passwordLength( password, minLength )
-					&& passwordBlacklist( password );
+					&& passwordBlacklist( password )
+					&& passwordIsBoring( password, maxGoogleHits );
  }
 
- public static Boolean passwordBatchValidation (List<String> passwords, int minLength, int minNumbersCount, int minUpperLowerCount) {
+ public static boolean passwordBatchValidation (List<String> passwords, int minLength, int minNumbersCount, int minUpperLowerCount, int maxGoogleHits) {
 	boolean boolToggle = false;
 	for ( String password : passwords ) {
-	 boolToggle = passwordValidation( password, minLength, minNumbersCount, minUpperLowerCount );
+	 boolToggle = passwordValidation( password, minLength, minNumbersCount, minUpperLowerCount, maxGoogleHits );
 	}
 	return boolToggle;
  }

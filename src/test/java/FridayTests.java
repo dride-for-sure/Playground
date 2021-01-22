@@ -69,44 +69,29 @@ public class FridayTests {
  @DisplayName ("PasswordValidation")
  @ParameterizedTest (name = "\"{0}\" has been tested")
  @MethodSource ("passwordValidationList")
- void passwordValidationTest (String password, int minLength, int minNumbersCount, int minUpperLowerCount, boolean expected) {
-	assertEquals( expected, Friday.passwordValidation( password, minLength, minNumbersCount, minUpperLowerCount ) );
+ void passwordValidationTest (String password, int minLength, int minNumbersCount, int minUpperLowerCount, int maxGoogleHits, boolean expected) {
+	assertEquals( expected, Friday.passwordValidation( password, minLength, minNumbersCount, minUpperLowerCount, maxGoogleHits ) );
  }
 
  static Stream<Arguments> passwordValidationList () {
 	return Stream.of(
-					Arguments.of( "ÑèÒmígÒSPpÅ¢@_£Ê²(ÀåA", 20, 0, 2, true ), // too long
-					Arguments.of( "Ì^åÐRw[(fÅ¡Ø®jÊ1s\\qÜ", 20, 1, 3, true ), // equal
-					Arguments.of( "Ì^åÐRw[(fÅ¡Ø®jÊ1s\\qÜ", 20, 2, 2, false ), // equal but less numbers
-					Arguments.of( "~QB÷bzìDì¹loßÁ¢Ø/q$", 20, 3, 2, false ), // too short
-					Arguments.of( "                    ", 20, 4, 0, false ), // whitespace
-					Arguments.of( "", 20, 0, 1, false ), // empty
-					Arguments.of( "", 0, 0, 0, true ) // empty
-	);
- }
-
- @DisplayName ("PasswordBlacklist")
- @ParameterizedTest (name = "\"{0}\" has been tested")
- @MethodSource ("passwordBlackListValidationList")
- void passwordBlackListValidationTest (String password, boolean expected) {
-	assertEquals( expected, Friday.passwordBlacklist( password ) );
- }
-
- static Stream<Arguments> passwordBlackListValidationList () {
-	return Stream.of(
-					Arguments.of( "Ì^åÐRw[(fÅ¡ØjÊ1sqÜ", true ),
-					Arguments.of( "ÑèÒmígÒSPpÅ¢@_£Ê²(ÀåA", true ),
-					Arguments.of( "password", false ),
-					Arguments.of( "test", false ),
-					Arguments.of( "", true )
+					Arguments.of( "ÑèÒmígÒSPpÅ¢@_£Ê²(ÀåA", 20, 0, 2, 0, true ), // too long
+					Arguments.of( "Ì^åÐRw[(fÅ¡Ø®jÊ1s\\qÜ", 20, 1, 3, 0, true ), // equal
+					Arguments.of( "Ì^åÐRw[(fÅ¡Ø®jÊ1s\\qÜ", 20, 2, 2, 0, false ), // equal but less numbers
+					Arguments.of( "~QB÷bzìDì¹loßÁ¢Ø/q$", 20, 3, 2, 0, false ), // too short
+					Arguments.of( "                    ", 20, 4, 0, 0, false ), // whitespace
+					Arguments.of( "password", 20, 4, 0, 0, false ), // googlehits
+					Arguments.of( "test", 20, 4, 0, 0, false ), // googlehits
+					Arguments.of( "", 20, 0, 1, 0, false ), // empty
+					Arguments.of( "", 0, 0, 0, 0, true ) // empty
 	);
  }
 
  @DisplayName ("PasswordBatchValidation")
  @ParameterizedTest
  @MethodSource ("passwordBatchValidationList")
- void passwordBatchValidationTest (List<String> passwords, int minLength, int minNumbersCount, int minUpperLowerCount, boolean expected) {
-	assertEquals( expected, Friday.passwordBatchValidation( passwords, minLength, minNumbersCount, minUpperLowerCount ) );
+ void passwordBatchValidationTest (List<String> passwords, int minLength, int minNumbersCount, int minUpperLowerCount, int maxGoogleHits, boolean expected) {
+	assertEquals( expected, Friday.passwordBatchValidation( passwords, minLength, minNumbersCount, minUpperLowerCount, maxGoogleHits ) );
  }
 
  static Stream<Arguments> passwordBatchValidationList () {
@@ -116,14 +101,14 @@ public class FridayTests {
 													"ÑèÒmígÒSPpÅ¢@_£Ê²(ÀåA",
 													"23paisAkeBajdkW@_£Ê²(ÀåA",
 													"Ì^åÐRw[(fÅ¡Ø®jÊ1s\\\\qÜ"
-									), 20, 0, 2, true ),
+									), 20, 0, 2, 0, true ),
 					Arguments.of(
 									Arrays.asList(
 													"~QB÷bzìDì¹loßÁ¢Ø/q$",
 													"                    ",
 													" ",
 													""
-									), 20, 1, 1, false )
+									), 20, 1, 1, 0, false )
 	);
  }
 }
