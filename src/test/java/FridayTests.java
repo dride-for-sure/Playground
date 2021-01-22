@@ -85,6 +85,23 @@ public class FridayTests {
 	);
  }
 
+ @DisplayName ("PasswordBlacklist")
+ @ParameterizedTest (name = "\"{0}\" has been tested")
+ @MethodSource ("passwordBlackListValidationList")
+ void passwordBlackListValidationTest (String password, boolean expected) {
+	assertEquals( expected, Friday.passwordBlacklist( password ) );
+ }
+
+ static Stream<Arguments> passwordBlackListValidationList () {
+	return Stream.of(
+					Arguments.of( "Ì^åÐRw[(fÅ¡ØjÊ1sqÜ", true ),
+					Arguments.of( "ÑèÒmígÒSPpÅ¢@_£Ê²(ÀåA", true ),
+					Arguments.of( "password", false ),
+					Arguments.of( "test", false ),
+					Arguments.of( "", true )
+	);
+ }
+
  @DisplayName ("PasswordBatchValidation")
  @ParameterizedTest
  @MethodSource ("passwordBatchValidationList")
