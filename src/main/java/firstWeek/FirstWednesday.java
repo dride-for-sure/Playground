@@ -1,14 +1,16 @@
-public class Wednesday {
+package firstWeek;
+
+public class FirstWednesday {
 
  String constructorString;
 
- Wednesday (String str) {
+ FirstWednesday (String str) {
 	this.constructorString = str;
  }
 
  public static void main (String[] args) {
 	String passToConstructor = "Hello";
-	Wednesday pft = new Wednesday( passToConstructor );
+	FirstWednesday pft = new FirstWednesday( passToConstructor );
 	System.out.println( pft.constructorString );
  }
 
