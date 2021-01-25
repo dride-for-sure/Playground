@@ -1,8 +1,9 @@
 package secondWeek.StudentDB.model;
 
-public class Student {
- String name;
- int id;
+public class Student implements Students {
+
+ private String name;
+ private int id;
 
  public Student (String name, int id) {
 	this.name = name;
@@ -10,7 +11,7 @@ public class Student {
  }
 
  public String getName () {
-	return name;
+	return this.name;
  }
 
  public void setName (String name) {
@@ -18,7 +19,7 @@ public class Student {
  }
 
  public int getId () {
-	return id;
+	return this.id;
  }
 
  public void setId (int id) {

@@ -9,8 +9,7 @@ public class StudentDB {
  // Single
  public Student getStudent (int id) {
 	for ( Student student : this.students ) {
-	 System.out.println( student.id );
-	 if ( student.id == id ) {
+	 if ( student.getId() == id ) {
 		return student;
 	 }
 	}
