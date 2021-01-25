@@ -1,3 +1,6 @@
+package firstWeek;
+
+import firstWeek.FirstThursday;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,7 +12,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ThursdayTests {
+public class FirstThursdayTests {
 
  // Check People
  // CSV Source
@@ -20,7 +23,7 @@ public class ThursdayTests {
 				 "30, false",
  })
  void checkPeopleTest (int numbers, boolean status) {
-	assertEquals( status, Thursday.checkPeople( numbers ) );
+	assertEquals( status, FirstThursday.checkPeople( numbers ) );
  }
 
  // AlarmHandler
@@ -29,7 +32,7 @@ public class ThursdayTests {
  @ParameterizedTest (name = "{0} people entered at {1} and it returns {2}")
  @MethodSource
  void alarmHandlerTest (int number, String alarmStatus, boolean expected) {
-	assertEquals( expected, Thursday.alarmHandler( number, alarmStatus ) );
+	assertEquals( expected, FirstThursday.alarmHandler( number, alarmStatus ) );
  }
 
  private static Stream<Arguments> alarmHandlerTest () {
@@ -47,7 +50,7 @@ public class ThursdayTests {
  @ParameterizedTest (name = "{0}! is {1}")
  @MethodSource
  void factorialTest (int number, int expected) {
-	assertEquals( expected, Thursday.factorial( number ) );
+	assertEquals( expected, FirstThursday.factorial( number ) );
  }
 
  private static Stream<Arguments> factorialTest () {
@@ -64,6 +67,6 @@ public class ThursdayTests {
  @ParameterizedTest (name = "Länge: {1}")
  @ValueSource (ints = { 1, 2, 3, 4 })
  void studentArrayTest (int length) {
-	assertEquals( length, Thursday.studentArray( length ).length );
+	assertEquals( length, FirstThursday.studentArray( length ).length );
  }
 }

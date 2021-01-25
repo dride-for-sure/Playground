@@ -1,3 +1,5 @@
+package firstWeek;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -9,7 +11,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class Friday {
+public class FirstFriday {
 
  private static HttpResponse<String> getRapidApi (String uri, String apiKey, String rapidHost) {
 	try {

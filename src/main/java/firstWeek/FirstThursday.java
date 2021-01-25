@@ -1,6 +1,8 @@
+package firstWeek;
+
 import java.lang.reflect.Array;
 
-public class Thursday {
+public class FirstThursday {
 
  public static void main (String[] args) {
 	studentArray( 5 );
