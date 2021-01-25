@@ -1,9 +1,10 @@
-package secondWeek.model;
+package secondWeek.StudentDB.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDB {
- private ArrayList<Student> students = new ArrayList<Student>();
+ private final List<Student> students = new ArrayList<Student>();
 
  // Single
  public Student getStudent (int id) {
@@ -30,17 +31,32 @@ public class StudentDB {
 
 
  // Batch
- public ArrayList<Student> getStudents () {
+ public List<Student> getStudents () {
 	return this.students;
  }
 
- public void addStudents (ArrayList<Student> students) {
+ public void addStudents (List<Student> students) {
 	this.students.addAll( students );
  }
 
- public void deleteStudents (ArrayList<Student> deleteStudents) {
+ public void deleteStudents (List<Student> deleteStudents) {
 	for ( Student deleteStudent : deleteStudents ) {
 	 students.removeIf( student -> student == deleteStudent );
 	}
  }
+
+ public List<Student> getRandomStudents () {
+	List<Student> students = new ArrayList<Student>();
+	int count = (int) ( Math.random() * this.students.size() );
+	int i = 0;
+	while ( i < count ) {
+	 int randomIndex = (int) ( Math.random() * this.students.size() );
+	 if ( !students.contains( this.students.get( randomIndex ) ) ) {
+		students.add( this.students.get( randomIndex ) );
+		i++;
+	 }
+	}
+	return students;
+ }
+
 }

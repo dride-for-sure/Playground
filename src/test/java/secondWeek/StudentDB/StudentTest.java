@@ -1,13 +1,14 @@
-package secondWeek;
+package secondWeek.StudentDB;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import secondWeek.model.Student;
-import secondWeek.model.StudentDB;
+import secondWeek.StudentDB.model.Student;
+import secondWeek.StudentDB.model.StudentDB;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +34,7 @@ public class StudentTest {
 
  @Test
  void addGetStudents () {
-	ArrayList<Student> students = new ArrayList<Student>();
+	List<Student> students = new ArrayList<Student>();
 	students.add( new Student( "Hans", 1 ) );
 	students.add( new Student( "Otto", 2 ) );
 
@@ -62,7 +63,7 @@ public class StudentTest {
 
  @Test
  void deleteStudents () {
-	ArrayList<Student> students = new ArrayList<Student>();
+	List<Student> students = new ArrayList<Student>();
 	students.add( new Student( "Hans", 1 ) );
 	students.add( new Student( "Otto", 2 ) );
 
@@ -73,13 +74,27 @@ public class StudentTest {
 
  @Test
  void randomStudent () {
-	ArrayList<Student> students = new ArrayList<Student>();
+	List<Student> students = new ArrayList<Student>();
 	students.add( new Student( "Hans", 1 ) );
 	students.add( new Student( "Otto", 2 ) );
 
 	StudentDB db = new StudentDB();
 	db.addStudents( students );
-	db.getRandomStudent();
 	assertTrue( db.getRandomStudent() instanceof Student );
+ }
+
+ @Test
+ void randomStudents () {
+	List<Student> students = new ArrayList<Student>();
+	students.add( new Student( "Otto", 1 ) );
+	students.add( new Student( "Otto", 2 ) );
+	students.add( new Student( "Otto", 3 ) );
+	students.add( new Student( "Otto", 4 ) );
+	students.add( new Student( "Otto", 5 ) );
+
+	StudentDB db = new StudentDB();
+	db.addStudents( students );
+	System.out.print( db.getRandomStudents() );
+	assertTrue( db.getRandomStudents() instanceof List );
  }
 }
