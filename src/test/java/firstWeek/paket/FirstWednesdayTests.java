@@ -1,4 +1,4 @@
-package firstWeek;
+package firstWeek.paket;
 
 import firstWeek.FirstWednesday;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package firstWeek;
+package firstWeek.paket;
 
 import firstWeek.FirstThursday;
 import org.junit.jupiter.api.DisplayName;
