@@ -1,28 +1,11 @@
 package secondWeek.StudentDB.model;
 
-public class Student implements Students {
+public interface Student {
 
- private String name;
- private int id;
+ public String getName ();
 
- public Student (String name, int id) {
-	this.name = name;
-	this.id = id;
- }
+ public int getId ();
 
- public String getName () {
-	return this.name;
- }
+ public String getStudies ();
 
- public void setName (String name) {
-	this.name = name;
- }
-
- public int getId () {
-	return this.id;
- }
-
- public void setId (int id) {
-	this.id = id;
- }
 }
