@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import secondWeek.StudentDB.model.ScienceStudent;
 import secondWeek.StudentDB.model.GenericStudent;
+import secondWeek.StudentDB.model.ScienceStudent;
 import secondWeek.StudentDB.model.StudentDB;
 import secondWeek.StudentDB.model.Student;
 
