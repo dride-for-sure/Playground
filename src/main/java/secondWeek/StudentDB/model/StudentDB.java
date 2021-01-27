@@ -28,7 +28,6 @@ public class StudentDB {
 	return this.students.get( (int) ( Math.random() * this.students.size() ) );
  }
 
-
  // Batch
  public List<Student> getStudents () {
 	return this.students;
@@ -57,5 +56,5 @@ public class StudentDB {
 	}
 	return students;
  }
-
 }
+
