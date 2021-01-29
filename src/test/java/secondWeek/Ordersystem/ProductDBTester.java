@@ -22,7 +22,7 @@ public class ProductDBTester {
 	db.add( product3 );
 	db.add( product4 );
 	List<Product> actual = db.list();
-	
+
 	List<Product> expected = new ArrayList<Product>();
 	expected.add( new Bread( 1, "Roggenvollkornbrot", true ) );
 	expected.add( new Buns( 2, "Mohnbrötchen", false ) );
@@ -31,5 +31,47 @@ public class ProductDBTester {
 	assertEquals( expected, actual );
  }
 
+ @Test
+ void addAndListNull () {
+	ProductDb db = new ProductDb();
+	List<Product> actual = db.list();
+	List<Product> expected = new ArrayList<>();
+	assertEquals( expected, actual );
+ }
 
+ @Test
+ void addAndGet () {
+	Product product1 = new Bread( 1, "Roggenvollkornbrot", true );
+	Product product2 = new Buns( 2, "Mohnbrötchen", false );
+	Product product3 = new Bread( 3, "Bauernbrot", false );
+	Product product4 = new Buns( 4, "Seelenbrötchen", false );
+
+	ProductDb db = new ProductDb();
+	db.add( product1 );
+	db.add( product2 );
+	db.add( product3 );
+	db.add( product4 );
+
+	Product actual = db.get( 3 );
+	Product expected = new Bread( 3, "Bauernbrot", false );
+	assertEquals( expected, actual );
+ }
+
+ @Test
+ void addAndGetNull () {
+	Product product1 = new Bread( 1, "Roggenvollkornbrot", true );
+	Product product2 = new Buns( 2, "Mohnbrötchen", false );
+	Product product3 = new Bread( 3, "Bauernbrot", false );
+	Product product4 = new Buns( 4, "Seelenbrötchen", false );
+
+	ProductDb db = new ProductDb();
+	db.add( product1 );
+	db.add( product2 );
+	db.add( product3 );
+	db.add( product4 );
+
+	Product actual = db.get( 5 );
+	Product expected = null;
+	assertEquals( expected, actual );
+ }
 }
