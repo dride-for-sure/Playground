@@ -7,10 +7,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ProductDBTester {
+public class ProductDbTester {
 
  @Test
- void addAndList () {
+ void addAndGetProducts () {
 	Product product1 = new Bread( 1, "Roggenvollkornbrot", true );
 	Product product2 = new Buns( 2, "Mohnbrötchen", false );
 	Product product3 = new Bread( 3, "Bauernbrot", false );
@@ -21,7 +21,7 @@ public class ProductDBTester {
 	db.add( product2 );
 	db.add( product3 );
 	db.add( product4 );
-	List<Product> actual = db.list();
+	List<Product> actual = db.getProducts();
 
 	List<Product> expected = new ArrayList<Product>();
 	expected.add( new Bread( 1, "Roggenvollkornbrot", true ) );
@@ -32,15 +32,15 @@ public class ProductDBTester {
  }
 
  @Test
- void addAndListNull () {
+ void addAndGetProductsEmpty () {
 	ProductDb db = new ProductDb();
-	List<Product> actual = db.list();
+	List<Product> actual = db.getProducts();
 	List<Product> expected = new ArrayList<>();
 	assertEquals( expected, actual );
  }
 
  @Test
- void addAndGet () {
+ void addAndGetProduct () {
 	Product product1 = new Bread( 1, "Roggenvollkornbrot", true );
 	Product product2 = new Buns( 2, "Mohnbrötchen", false );
 	Product product3 = new Bread( 3, "Bauernbrot", false );
@@ -52,13 +52,13 @@ public class ProductDBTester {
 	db.add( product3 );
 	db.add( product4 );
 
-	Product actual = db.get( 3 );
+	Product actual = db.getProduct( 3 );
 	Product expected = new Bread( 3, "Bauernbrot", false );
 	assertEquals( expected, actual );
  }
 
  @Test
- void addAndGetNull () {
+ void addAndGetProductNull () {
 	Product product1 = new Bread( 1, "Roggenvollkornbrot", true );
 	Product product2 = new Buns( 2, "Mohnbrötchen", false );
 	Product product3 = new Bread( 3, "Bauernbrot", false );
@@ -70,7 +70,7 @@ public class ProductDBTester {
 	db.add( product3 );
 	db.add( product4 );
 
-	Product actual = db.get( 5 );
+	Product actual = db.getProduct( 5 );
 	Product expected = null;
 	assertEquals( expected, actual );
  }
