@@ -34,7 +34,17 @@ public class OrderDb {
 	Collection val = orderDb.values();
 	return new ArrayList<Order>( val );
  }
- 
+
+ public void refresh (Optional<List<Order>> orders) {
+	HashMap<Integer, Order> orderDb = new HashMap<>();
+	if ( orders.isPresent() ) {
+	 for ( Order order : orders.get() ) {
+		orderDb.put( order.getId(), order );
+	 }
+	}
+	this.orderDb = orderDb;
+ }
+
  @Override
  public String toString () {
 	return "OrderDb{" +

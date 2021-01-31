@@ -35,6 +35,16 @@ public class ProductDb {
 	return new ArrayList<Product>( val );
  }
 
+ public void refresh (Optional<List<Product>> products) {
+	HashMap<Integer, Product> productDb = new HashMap<>();
+	if ( products.isPresent() ) {
+	 for ( Product product : products.get() ) {
+		productDb.put( product.getId(), product );
+	 }
+	}
+	this.productDb = productDb;
+ }
+
  @Override
  public String toString () {
 	return "ProductDb{" +
