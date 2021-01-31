@@ -68,4 +68,11 @@ public class ListItemTest {
 	listHead.removeItemsLike( listItem3 );
 	assertEquals( "A -> C -> D", listHead.list() );
  }
+
+ @Test
+ void removeFromShortList () {
+	ListItem listHead = new ListItem( new Animal( "A" ) );
+	listHead.removeItemsLike( listHead );
+	assertEquals( "", listHead.list() );
+ }
 }

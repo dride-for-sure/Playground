@@ -27,7 +27,7 @@ public class ListItem {
  @Override
  public String toString () {
 	return "ListItem{" +
-					"value=" + value.getName() +
+					"value=" + value +
 					", next=" + next +
 					'}';
  }
@@ -56,7 +56,7 @@ public class ListItem {
  }
 
  public void removeItemsLike (ListItem listItem) {
-	if ( listItem.getValue().getName() == this.getValue().getName() ) {
+	if ( listItem.getValue().getName().equals( this.getValue().getName() ) ) {
 	 this.removeHead( listItem );
 	} else {
 	 this.removeTail( listItem );
@@ -70,7 +70,7 @@ public class ListItem {
  private void removeTail (ListItem listItem) {
 	ListItem thisListItem = this;
 	while ( thisListItem.getNext() != null ) {
-	 if ( thisListItem.getNext().getValue().getName() == listItem.getValue().getName() ) {
+	 if ( thisListItem.getNext().getValue().getName().equals( listItem.getValue().getName() ) ) {
 		thisListItem.setNext( thisListItem.getNext().getNext() );
 	 }
 	 if ( thisListItem.getNext() != null ) {

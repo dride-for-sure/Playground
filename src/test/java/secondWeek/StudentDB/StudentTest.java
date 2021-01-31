@@ -1,6 +1,5 @@
 package secondWeek.StudentDB;
 
-import com.fasterxml.jackson.databind.jsontype.impl.AsExistingPropertyTypeSerializer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,11 +11,12 @@ import secondWeek.StudentDB.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StudentTest {
+public class StudentTest<V> {
 
  @ParameterizedTest
  @MethodSource
@@ -50,6 +50,31 @@ public class StudentTest {
 	expectedStudents.add( new GenericStudent( "Hans", 1, "Deutsch" ) );
 	expectedStudents.add( new GenericStudent( "Otto", 2, "Philosophie" ) );
 	assertEquals( expectedStudents, db.getStudents() );
+ }
+
+ @Test
+ void findStudentsByIDWithSuccess () {
+	List<Student> students = new ArrayList<Student>();
+	students.add( new GenericStudent( "Hans", 1, "Deutsch" ) );
+	students.add( new GenericStudent( "Otto", 2, "Philosophie" ) );
+
+	StudentDB db = new StudentDB();
+	db.addStudents( students );
+	Optional<Student> studentOptional = db.findById( 1 );
+	assertTrue( studentOptional.isPresent() );
+ }
+
+ @Test
+ void findStudentsByIDWithoutSuccess () {
+	List<Student> students = new ArrayList<Student>();
+	students.add( new GenericStudent( "Hans", 1, "Deutsch" ) );
+	students.add( new GenericStudent( "Otto", 2, "Philosophie" ) );
+
+	StudentDB db = new StudentDB();
+	db.addStudents( students );
+	Optional<Student> studentOptional = db.findById( 3 );
+	assertTrue( studentOptional.isEmpty() );
+
  }
 
  @ParameterizedTest

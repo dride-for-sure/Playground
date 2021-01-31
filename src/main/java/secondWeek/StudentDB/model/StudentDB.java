@@ -1,45 +1,52 @@
 package secondWeek.StudentDB.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class StudentDB {
- private final List<Student> students = new ArrayList<Student>();
+ private final HashMap<Integer, Student> students = new HashMap<>();
 
  // Single
  public Student getStudent (int id) {
-	for ( Student student : this.students ) {
-	 if ( student.getId() == id ) {
-		return student;
-	 }
-	}
-	return null; // what to return?
+	return this.students.get( id );
  }
 
  public void addStudent (Student student) {
-	this.students.add( student );
+	this.students.put( student.getId(), student );
  }
 
  public void deleteStudent (Student deleteStudent) {
-	students.removeIf( student -> student == deleteStudent );
+	this.students.remove( deleteStudent.getId() );
  }
 
  public Student getRandomStudent () {
-	return this.students.get( (int) ( Math.random() * this.students.size() ) );
+	Object[] array = this.students.keySet().toArray();
+	Object randomKey = array[ (int) ( Math.random() * this.students.size() ) ];
+	return this.students.get( randomKey );
+ }
+
+ public Optional<Student> findById (int id) {
+	Student possibleStudent = this.students.get( id );
+	if ( possibleStudent == null ) {
+	 return Optional.empty();
+	}
+	return Optional.of( possibleStudent );
  }
 
  // Batch
  public List<Student> getStudents () {
-	return this.students;
+	Collection<Student> values = this.students.values();
+	return new ArrayList<Student>( values );
  }
 
  public void addStudents (List<Student> students) {
-	this.students.addAll( students );
+	for ( Student student : students ) {
+	 this.students.put( student.getId(), student );
+	}
  }
 
  public void deleteStudents (List<Student> deleteStudents) {
 	for ( Student deleteStudent : deleteStudents ) {
-	 students.removeIf( student -> student == deleteStudent );
+	 students.remove( deleteStudent.getId() );
 	}
  }
 
