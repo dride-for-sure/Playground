@@ -10,11 +10,14 @@ public class OrderDb {
 	orderDb.put( order.getId(), order );
  }
 
- public Order get (int id) {
-	return orderDb.get( id );
+ public Optional<Order> get (int id) {
+	if ( orderDb.get( id ) == null ) {
+	 return Optional.empty();
+	}
+	return Optional.of( orderDb.get( id ) );
  }
 
- public List<Order> getOrders () {
+ public List<Order> list () {
 	Collection val = orderDb.values();
 	return new ArrayList<Order>( val );
  }

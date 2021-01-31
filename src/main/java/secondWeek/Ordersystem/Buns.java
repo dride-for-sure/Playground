@@ -2,13 +2,24 @@ package secondWeek.Ordersystem;
 
 import java.util.Objects;
 
-public class Buns extends Products {
+public class Buns {
 
  private final boolean sesam;
+ private final String name;
+ private final int id;
 
  public Buns (int id, String name, boolean sesam) {
-	super( id, name );
+	this.name = name;
+	this.id = id;
 	this.sesam = sesam;
+ }
+
+ public int getId () {
+	return this.id;
+ }
+
+ public String getName () {
+	return this.name;
  }
 
  public boolean getSesam () {
@@ -19,6 +30,8 @@ public class Buns extends Products {
  public String toString () {
 	return "Buns{" +
 					"sesam=" + sesam +
+					", name='" + name + '\'' +
+					", id=" + id +
 					'}';
  }
 

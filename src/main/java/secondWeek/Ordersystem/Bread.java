@@ -2,13 +2,24 @@ package secondWeek.Ordersystem;
 
 import java.util.Objects;
 
-public class Bread extends Products {
+public class Bread {
 
  private final boolean vollkorn;
+ private final String name;
+ private final int id;
 
  public Bread (int id, String name, boolean vollkorn) {
-	super( id, name );
+	this.name = name;
+	this.id = id;
 	this.vollkorn = vollkorn;
+ }
+
+ public int getId () {
+	return this.id;
+ }
+
+ public String getName () {
+	return this.name;
  }
 
  public boolean getVollkorn () {
@@ -19,6 +30,8 @@ public class Bread extends Products {
  public String toString () {
 	return "Bread{" +
 					"vollkorn=" + vollkorn +
+					", name='" + name + '\'' +
+					", id=" + id +
 					'}';
  }
 

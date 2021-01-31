@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderDbTester {
 
@@ -30,7 +32,7 @@ public class OrderDbTester {
 	orderDb.add( order1 );
 	orderDb.add( order2 );
 
-	List<Order> actual = orderDb.getOrders();
+	List<Order> actual = orderDb.list();
 
 	ArrayList<Product> expectedOrder1List = new ArrayList<>();
 	expectedOrder1List.add( new Bread( 1, "Roggenvollkornbrot", true ) );
@@ -52,7 +54,7 @@ public class OrderDbTester {
  @Test
  void addAndGetOrdersEmpty () {
 	OrderDb orderDb = new OrderDb();
-	List<Order> actual = orderDb.getOrders();
+	List<Order> actual = orderDb.list();
 	ArrayList<Order> expected = new ArrayList<>();
 	assertEquals( actual, expected );
  }
@@ -78,14 +80,14 @@ public class OrderDbTester {
 	orderDb.add( order1 );
 	orderDb.add( order2 );
 
-	Order actual = orderDb.get( 1 );
+	Optional<Order> actual = orderDb.get( 1 );
 
 	ArrayList<Product> expectedOrder = new ArrayList<>();
 	expectedOrder.add( new Bread( 1, "Roggenvollkornbrot", true ) );
 	expectedOrder.add( new Buns( 2, "Mohnbrötchen", false ) );
 	Order expected = new Order( 1, expectedOrder );
 
-	assertEquals( actual, expected );
+	assertEquals( actual.get(), expected );
  }
 
  @Test
@@ -109,8 +111,8 @@ public class OrderDbTester {
 	orderDb.add( order1 );
 	orderDb.add( order2 );
 
-	Order actual = orderDb.get( 3 );
+	Optional<Order> actual = orderDb.get( 3 );
 
-	assertEquals( actual, null );
+	assertTrue( actual.isEmpty() );
  }
 }

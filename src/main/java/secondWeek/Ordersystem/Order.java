@@ -1,24 +1,35 @@
 package secondWeek.Ordersystem;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Order {
 
- private final int id;
- private final ArrayList<Product> products;
+ private int id;
+ private List<Product> products;
 
- public Order (int id, ArrayList<Product> products) {
+ public Order (int id, List<Product> products) {
 	this.id = id;
 	this.products = products;
+ }
+
+ public Order () {
  }
 
  public int getId () {
 	return id;
  }
 
- public ArrayList<Product> getProducts () {
+ public List<Product> getProducts () {
 	return products;
+ }
+
+ public void setId (int id) {
+	this.id = id;
+ }
+
+ public void setProducts (List<Product> products) {
+	this.products = products;
  }
 
  @Override
