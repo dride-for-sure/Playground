@@ -78,4 +78,14 @@ public class ProductDbTester {
 	Optional<List<Product>> actual = db.get( 5 );
 	assertTrue( actual.isEmpty() );
  }
+
+ @Test
+ void refresh () {
+
+ }
+
+ @Test
+ void refreshEmpty () {
+
+ }
 }

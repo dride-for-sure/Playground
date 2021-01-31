@@ -16,14 +16,14 @@ public class OrderService {
 
  public void addOrder (Order order) {
 	this.orderDb.add( order );
-	// refresh
+	this.orderDb.refresh( this.storage.refreshOrders( this.orderDb.list() ) );
  }
 
  public Optional<List<Order>> getOrder (int id) {
 	Optional<List<Order>> order;
 	try {
 	 order = this.orderDb.get( id );
-	 if ( !order.isPresent() ) {
+	 if ( order.isEmpty() ) {
 		throw new Exception( "Order with ID is not available" );
 	 }
 	} catch ( Exception e ) {
@@ -35,7 +35,7 @@ public class OrderService {
 
  public void removeOrder (int id) {
 	this.orderDb.remove( id );
-	// refresh
+	this.orderDb.refresh( this.storage.refreshOrders( this.orderDb.list() ) );
  }
 
  public List<Order> listOrders () {
@@ -44,14 +44,14 @@ public class OrderService {
 
  public void addProduct (Product product) {
 	this.productDb.add( product );
-	// refresh
+	this.productDb.refresh( this.storage.refreshProducts( this.productDb.list() ) );
  }
 
  public Optional<List<Product>> getProduct (int id) {
 	Optional<List<Product>> product;
 	try {
 	 product = this.productDb.get( id );
-	 if ( !product.isPresent() ) {
+	 if ( product.isEmpty() ) {
 		throw new Exception( "Order with ID is not available" );
 	 }
 	} catch ( Exception e ) {
@@ -63,7 +63,7 @@ public class OrderService {
 
  public void removeProduct (int id) {
 	this.productDb.remove( id );
-	// refresh
+	this.productDb.refresh( this.storage.refreshProducts( this.productDb.list() ) );
  }
 
  public List<Product> listProducts () {
