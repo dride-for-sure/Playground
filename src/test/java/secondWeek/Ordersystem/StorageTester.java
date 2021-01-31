@@ -4,29 +4,23 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StorageTester {
 
  @Test
- void putOrderDbTest () {
- }
-
- @Test
- void putProductDbTest () {
- }
-
- @Test
- void getOrderDbTest () {
-	Product order1Product1 = new Bread( 1, "Roggenvollkornbrot", true );
-	Product order1Product2 = new Buns( 2, "Mohnbrötchen", false );
+ void putAndGetOrderDb () {
+	Product order1Product1 = new Product( 1, "Roggenvollkornbrot", true );
+	Product order1Product2 = new Product( 2, "Mohnbrötchen", false );
 	ArrayList<Product> order1Products = new ArrayList<>();
 	order1Products.add( order1Product1 );
 	order1Products.add( order1Product2 );
 
-	Product order2Product1 = new Bread( 1, "Bauernbrot", false );
-	Product order2Product2 = new Buns( 2, "Seelenbrötchen", false );
+	Product order2Product1 = new Product( 3, "Bauernbrot", false );
+	Product order2Product2 = new Product( 4, "Seelenbrötchen", false );
 	ArrayList<Product> order2Products = new ArrayList<>();
 	order2Products.add( order2Product1 );
 	order2Products.add( order2Product2 );
@@ -35,22 +29,20 @@ public class StorageTester {
 	Order order2 = new Order( 2, order2Products );
 
 	OrderService orderService = new OrderService();
-	orderService.add( order1 );
-	orderService.add( order2 );
+	orderService.addOrder( order1 );
+	orderService.addOrder( order2 );
 
 	Storage storage = new Storage();
-	storage.putOrderDb( orderService.list() );
+	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() ); // optional
 
-	List<Order> actual = storage.getOrderDb();
-
-	Product expectedOrder1Product1 = new Bread( 1, "Roggenvollkornbrot", true );
-	Product expectedOrder1Product2 = new Buns( 2, "Mohnbrötchen", false );
+	Product expectedOrder1Product1 = new Product( 1, "Roggenvollkornbrot", true );
+	Product expectedOrder1Product2 = new Product( 2, "Mohnbrötchen", false );
 	ArrayList<Product> expectedOrder1Products = new ArrayList<>();
 	expectedOrder1Products.add( expectedOrder1Product1 );
 	expectedOrder1Products.add( expectedOrder1Product2 );
 
-	Product expectedOrder2Product1 = new Bread( 1, "Bauernbrot", false );
-	Product expectedOrder2Product2 = new Buns( 2, "Seelenbrötchen", false );
+	Product expectedOrder2Product1 = new Product( 3, "Bauernbrot", false );
+	Product expectedOrder2Product2 = new Product( 4, "Seelenbrötchen", false );
 	ArrayList<Product> expectedOrder2Products = new ArrayList<>();
 	expectedOrder2Products.add( expectedOrder2Product1 );
 	expectedOrder2Products.add( expectedOrder2Product2 );
@@ -62,17 +54,51 @@ public class StorageTester {
 	expected.add( expectedOrder1 );
 	expected.add( expectedOrder2 );
 
-	assertEquals( expected, actual );
+	assertEquals( expected, actual.get() );
  }
 
- /*@Test
- void getOrderDbTestEmpty () {
+ @Test
+ void putAndGetOrderDbEmpty () {
 	Storage storage = new Storage();
-	List<Order> orderDb = storage.getOrderDb();
-	assertEquals( orderDb, new ArrayList<>() );
- }*/
+	OrderService orderService = new OrderService();
+	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() );
+	assertTrue( actual.isEmpty() );
+ }
 
  @Test
- void getProductDbTest () {
+ void putAndGetProductDb () {
+	ProductDb productDb = new ProductDb();
+	Product orderProduct1 = new Product( 1, "Roggenvollkornbrot", true );
+	Product orderProduct2 = new Product( 2, "Mohnbrötchen", false );
+	Product orderProduct3 = new Product( 3, "Bauernbrot", false );
+	Product orderProduct4 = new Product( 4, "Seelenbrötchen", false );
+	productDb.add( orderProduct1 );
+	productDb.add( orderProduct2 );
+	productDb.add( orderProduct3 );
+	productDb.add( orderProduct4 );
+
+	Storage storage = new Storage();
+	Optional<List<Product>> actual = storage.refreshProducts( productDb.list() );
+
+	Product expectedOrderProduct1 = new Product( 1, "Roggenvollkornbrot", true );
+	Product expectedOrderProduct2 = new Product( 2, "Mohnbrötchen", false );
+	Product expectedOrderProduct3 = new Product( 3, "Bauernbrot", false );
+	Product expectedOrderProduct4 = new Product( 4, "Seelenbrötchen", false );
+
+	List<Product> expected = new ArrayList<>();
+	expected.add( expectedOrderProduct1 );
+	expected.add( expectedOrderProduct2 );
+	expected.add( expectedOrderProduct3 );
+	expected.add( expectedOrderProduct4 );
+
+	assertEquals( expected, actual.get() );
+ }
+
+ @Test
+ void putAndGetProductDbEmpty () {
+	ProductDb productDb = new ProductDb();
+	Storage storage = new Storage();
+	Optional<List<Product>> actual = storage.refreshProducts( productDb.list() );
+	assertTrue( actual.isEmpty() );
  }
 }

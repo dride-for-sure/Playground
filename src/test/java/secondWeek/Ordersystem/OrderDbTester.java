@@ -13,14 +13,14 @@ public class OrderDbTester {
 
  @Test
  void addAndGetOrders () {
-	Product order1Product1 = new Bread( 1, "Roggenvollkornbrot", true );
-	Product order1Product2 = new Buns( 2, "Mohnbrötchen", false );
+	Product order1Product1 = new Product( 1, "Roggenvollkornbrot", true );
+	Product order1Product2 = new Product( 2, "Mohnbrötchen", false );
 	ArrayList<Product> order1Products = new ArrayList<>();
 	order1Products.add( order1Product1 );
 	order1Products.add( order1Product2 );
 
-	Product order2Product1 = new Bread( 1, "Bauernbrot", false );
-	Product order2Product2 = new Buns( 2, "Seelenbrötchen", false );
+	Product order2Product1 = new Product( 3, "Bauernbrot", false );
+	Product order2Product2 = new Product( 4, "Seelenbrötchen", false );
 	ArrayList<Product> order2Products = new ArrayList<>();
 	order2Products.add( order2Product1 );
 	order2Products.add( order2Product2 );
@@ -35,13 +35,13 @@ public class OrderDbTester {
 	List<Order> actual = orderDb.list();
 
 	ArrayList<Product> expectedOrder1List = new ArrayList<>();
-	expectedOrder1List.add( new Bread( 1, "Roggenvollkornbrot", true ) );
-	expectedOrder1List.add( new Buns( 2, "Mohnbrötchen", false ) );
+	expectedOrder1List.add( new Product( 1, "Roggenvollkornbrot", true ) );
+	expectedOrder1List.add( new Product( 2, "Mohnbrötchen", false ) );
 	Order expectedOrder1 = new Order( 1, expectedOrder1List );
 
 	ArrayList<Product> expectedOrder2List = new ArrayList<>();
-	expectedOrder2List.add( new Bread( 1, "Bauernbrot", false ) );
-	expectedOrder2List.add( new Buns( 2, "Seelenbrötchen", false ) );
+	expectedOrder2List.add( new Product( 3, "Bauernbrot", false ) );
+	expectedOrder2List.add( new Product( 4, "Seelenbrötchen", false ) );
 	Order expectedOrder2 = new Order( 2, expectedOrder2List );
 
 	ArrayList<Order> expected = new ArrayList<>();
@@ -61,14 +61,14 @@ public class OrderDbTester {
 
  @Test
  void addAndGetProduct () {
-	Product order1Product1 = new Bread( 1, "Roggenvollkornbrot", true );
-	Product order1Product2 = new Buns( 2, "Mohnbrötchen", false );
+	Product order1Product1 = new Product( 1, "Roggenvollkornbrot", true );
+	Product order1Product2 = new Product( 2, "Mohnbrötchen", false );
 	ArrayList<Product> order1Products = new ArrayList<>();
 	order1Products.add( order1Product1 );
 	order1Products.add( order1Product2 );
 
-	Product order2Product1 = new Bread( 1, "Bauernbrot", false );
-	Product order2Product2 = new Buns( 2, "Seelenbrötchen", false );
+	Product order2Product1 = new Product( 3, "Bauernbrot", false );
+	Product order2Product2 = new Product( 4, "Seelenbrötchen", false );
 	ArrayList<Product> order2Products = new ArrayList<>();
 	order2Products.add( order2Product1 );
 	order2Products.add( order2Product2 );
@@ -80,26 +80,26 @@ public class OrderDbTester {
 	orderDb.add( order1 );
 	orderDb.add( order2 );
 
-	Optional<Order> actual = orderDb.get( 1 );
+	Optional<List<Order>> actual = orderDb.get( 1 );
 
 	ArrayList<Product> expectedOrder = new ArrayList<>();
-	expectedOrder.add( new Bread( 1, "Roggenvollkornbrot", true ) );
-	expectedOrder.add( new Buns( 2, "Mohnbrötchen", false ) );
+	expectedOrder.add( new Product( 1, "Roggenvollkornbrot", true ) );
+	expectedOrder.add( new Product( 2, "Mohnbrötchen", false ) );
 	Order expected = new Order( 1, expectedOrder );
 
-	assertEquals( actual.get(), expected );
+	assertEquals( actual.get().get( 0 ), expected );
  }
 
  @Test
  void addAndGetProductNull () {
-	Product order1Product1 = new Bread( 1, "Roggenvollkornbrot", true );
-	Product order1Product2 = new Buns( 2, "Mohnbrötchen", false );
+	Product order1Product1 = new Product( 1, "Roggenvollkornbrot", true );
+	Product order1Product2 = new Product( 2, "Mohnbrötchen", false );
 	ArrayList<Product> order1Products = new ArrayList<>();
 	order1Products.add( order1Product1 );
 	order1Products.add( order1Product2 );
 
-	Product order2Product1 = new Bread( 1, "Bauernbrot", false );
-	Product order2Product2 = new Buns( 2, "Seelenbrötchen", false );
+	Product order2Product1 = new Product( 3, "Bauernbrot", false );
+	Product order2Product2 = new Product( 4, "Seelenbrötchen", false );
 	ArrayList<Product> order2Products = new ArrayList<>();
 	order2Products.add( order2Product1 );
 	order2Products.add( order2Product2 );
@@ -111,7 +111,7 @@ public class OrderDbTester {
 	orderDb.add( order1 );
 	orderDb.add( order2 );
 
-	Optional<Order> actual = orderDb.get( 3 );
+	Optional<List<Order>> actual = orderDb.get( 3 );
 
 	assertTrue( actual.isEmpty() );
  }

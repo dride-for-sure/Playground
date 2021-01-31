@@ -10,18 +10,31 @@ public class OrderDb {
 	orderDb.put( order.getId(), order );
  }
 
- public Optional<Order> get (int id) {
-	if ( orderDb.get( id ) == null ) {
+ public void remove (int id) {
+	this.orderDb.remove( id );
+ }
+
+ public Optional<List<Order>> get (int id) {
+	List<Order> list = new ArrayList<>();
+	try {
+	 Order order = orderDb.get( id );
+	 if ( order == null ) {
+		throw new Exception( "Order with ID is not available" );
+	 } else {
+		list.add( order );
+	 }
+	} catch ( Exception e ) {
+	 System.out.println( e );
 	 return Optional.empty();
 	}
-	return Optional.of( orderDb.get( id ) );
+	return Optional.of( list );
  }
 
  public List<Order> list () {
 	Collection val = orderDb.values();
 	return new ArrayList<Order>( val );
  }
-
+ 
  @Override
  public String toString () {
 	return "OrderDb{" +

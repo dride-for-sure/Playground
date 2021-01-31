@@ -10,28 +10,29 @@ public class ProductDb {
 	productDb.put( products.getId(), products );
  }
 
+ public void remove (int id) {
+	this.productDb.remove( id );
+ }
+
  public Optional<List<Product>> get (int id) {
 	List<Product> list = new ArrayList<>();
 	try {
 	 Product product = productDb.get( id );
 	 if ( product == null ) {
-		throw new Exception( "Order with ID is not available" );
+		throw new Exception( "Product with ID is not available" );
 	 } else {
 		list.add( product );
 	 }
 	} catch ( Exception e ) {
 	 System.out.println( e );
+	 return Optional.empty();
 	}
 	return Optional.of( list );
  }
 
- public Optional<List<Product>> list () {
+ public List<Product> list () {
 	Collection val = productDb.values();
-	if ( val.isEmpty() ) {
-	 return Optional.empty();
-	} else {
-	 return Optional.of( new ArrayList<Product>( val ) );
-	}
+	return new ArrayList<Product>( val );
  }
 
  @Override
