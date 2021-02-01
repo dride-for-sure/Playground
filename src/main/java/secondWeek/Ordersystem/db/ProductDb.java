@@ -1,4 +1,6 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.db;
+
+import secondWeek.Ordersystem.model.Product;
 
 import java.util.*;
 

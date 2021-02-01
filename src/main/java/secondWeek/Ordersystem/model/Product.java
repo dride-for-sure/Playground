@@ -1,4 +1,4 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.model;
 
 import java.util.Objects;
 

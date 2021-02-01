@@ -1,14 +1,16 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import secondWeek.Ordersystem.model.Order;
+import secondWeek.Ordersystem.model.Product;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Storage {
+public class StorageService {
  ObjectMapper objectMapper = new ObjectMapper();
  String orderDbPath = "target/orderDb.json";
  String productDbPath = "target/productDb.json";

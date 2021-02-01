@@ -1,6 +1,9 @@
 package secondWeek.Ordersystem;
 
 import org.junit.jupiter.api.Test;
+import secondWeek.Ordersystem.model.Order;
+import secondWeek.Ordersystem.model.Product;
+import secondWeek.Ordersystem.services.OrderService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +80,7 @@ public class OrderServiceTest {
  }
 
  @Test
- void getOrderByIdInavlid () {
+ void getOrderByIdInvalid () {
 	ArrayList<Product> order1List = new ArrayList<>();
 	order1List.add( new Product( 1, "Roggenvollkornbrot", true ) );
 	order1List.add( new Product( 2, "Mohnbrötchen", false ) );
