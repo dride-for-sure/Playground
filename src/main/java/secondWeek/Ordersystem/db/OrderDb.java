@@ -1,7 +1,6 @@
 package secondWeek.Ordersystem.db;
 
 import secondWeek.Ordersystem.model.Order;
-import secondWeek.Ordersystem.model.Product;
 
 import java.util.*;
 
