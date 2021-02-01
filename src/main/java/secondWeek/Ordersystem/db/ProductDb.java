@@ -2,7 +2,6 @@ package secondWeek.Ordersystem.db;
 
 import secondWeek.Ordersystem.model.Product;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 public class ProductDb {
