@@ -43,7 +43,7 @@ public class Product {
 
  @Override
  public String toString () {
-	return "Bread{" +
+	return "Buns{" +
 					"vollkorn=" + vollkorn +
 					", name='" + name + '\'' +
 					", id=" + id +
@@ -55,11 +55,11 @@ public class Product {
 	if ( this == o ) return true;
 	if ( o == null || getClass() != o.getClass() ) return false;
 	Product product = (Product) o;
-	return getVollkorn() == product.getVollkorn();
+	return getVollkorn() == product.getVollkorn() && getId() == product.getId() && Objects.equals( getName(), product.getName() );
  }
 
  @Override
  public int hashCode () {
-	return Objects.hash( getVollkorn() );
+	return Objects.hash( getVollkorn(), getName(), getId() );
  }
 }

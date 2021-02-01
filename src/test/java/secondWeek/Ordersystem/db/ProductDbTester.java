@@ -1,7 +1,6 @@
 package secondWeek.Ordersystem.db;
 
 import org.junit.jupiter.api.Test;
-import secondWeek.Ordersystem.db.ProductDb;
 import secondWeek.Ordersystem.model.Product;
 
 import java.util.ArrayList;
@@ -80,5 +79,5 @@ public class ProductDbTester {
 	Optional<List<Product>> actual = db.get( 5 );
 	assertTrue( actual.isEmpty() );
  }
- 
+
 }

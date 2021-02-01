@@ -1,9 +1,8 @@
 package secondWeek.Ordersystem.services;
 
 import org.junit.jupiter.api.Test;
-import secondWeek.Ordersystem.model.Order;
 import secondWeek.Ordersystem.model.Product;
-import secondWeek.Ordersystem.services.OrderService;
+import secondWeek.Ordersystem.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +75,7 @@ public class OrderServiceTest {
 	productList.add( new Product( 1, "Roggenvollkornbrot", true ) );
 	productList.add( new Product( 2, "Mohnbrötchen", false ) );
 	Order expected = new Order( 1, productList );
-	assertEquals( expected, actual.get().get( 0 ) );
+	assertEquals( actual.get().get( 0 ), expected );
  }
 
  @Test

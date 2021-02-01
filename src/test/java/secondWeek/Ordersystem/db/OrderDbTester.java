@@ -1,8 +1,8 @@
 package secondWeek.Ordersystem.db;
 
 import org.junit.jupiter.api.Test;
-import secondWeek.Ordersystem.model.Order;
 import secondWeek.Ordersystem.model.Product;
+import secondWeek.Ordersystem.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
