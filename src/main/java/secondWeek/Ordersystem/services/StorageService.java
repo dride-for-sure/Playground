@@ -15,12 +15,12 @@ public class StorageService {
  String orderDbPath = "target/orderDb.json";
  String productDbPath = "target/productDb.json";
 
- public Optional<List<Order>> refreshOrders (List<Order> orders) {
+ public Optional<List<Order>> updateOrders (List<Order> orders) {
 	this.putOrderDb( orders );
 	return this.getOrderDb();
  }
 
- public Optional<List<Product>> refreshProducts (List<Product> products) {
+ public Optional<List<Product>> updateProducts (List<Product> products) {
 	this.putProductDb( products );
 	return this.getProductDb();
  }

@@ -21,7 +21,7 @@ public class OrderService {
 
  public void addOrder (Order order) {
 	this.orderDb.add( order );
-	this.orderDb.refresh( this.storage.refreshOrders( this.orderDb.list() ) );
+	this.orderDb.refresh( this.storage.updateOrders( this.orderDb.list() ) );
  }
 
  public Optional<List<Order>> getOrder (int id) {
@@ -40,7 +40,7 @@ public class OrderService {
 
  public void removeOrder (int id) {
 	this.orderDb.remove( id );
-	this.orderDb.refresh( this.storage.refreshOrders( this.orderDb.list() ) );
+	this.orderDb.refresh( this.storage.updateOrders( this.orderDb.list() ) );
  }
 
  public List<Order> listOrders () {
@@ -49,7 +49,7 @@ public class OrderService {
 
  public void addProduct (Product product) {
 	this.productDb.add( product );
-	this.productDb.refresh( this.storage.refreshProducts( this.productDb.list() ) );
+	this.productDb.refresh( this.storage.updateProducts( this.productDb.list() ) );
  }
 
  public Optional<List<Product>> getProduct (int id) {
@@ -68,7 +68,7 @@ public class OrderService {
 
  public void removeProduct (int id) {
 	this.productDb.remove( id );
-	this.productDb.refresh( this.storage.refreshProducts( this.productDb.list() ) );
+	this.productDb.refresh( this.storage.updateProducts( this.productDb.list() ) );
  }
 
  public List<Product> listProducts () {

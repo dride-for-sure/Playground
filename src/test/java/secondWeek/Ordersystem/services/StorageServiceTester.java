@@ -36,7 +36,7 @@ public class StorageServiceTester {
 	orderService.addOrder( order2 );
 
 	StorageService storage = new StorageService();
-	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() );
+	Optional<List<Order>> actual = storage.updateOrders( orderService.listOrders() );
 
 	Product expectedOrder1Product1 = new Product( 1, "Roggenvollkornbrot", true );
 	Product expectedOrder1Product2 = new Product( 2, "Mohnbrötchen", false );
@@ -64,7 +64,7 @@ public class StorageServiceTester {
  void putAndGetOrderDbEmpty () {
 	StorageService storage = new StorageService();
 	OrderService orderService = new OrderService();
-	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() );
+	Optional<List<Order>> actual = storage.updateOrders( orderService.listOrders() );
 	assertTrue( actual.isEmpty() );
  }
 
@@ -81,7 +81,7 @@ public class StorageServiceTester {
 	productDb.add( orderProduct4 );
 
 	StorageService storage = new StorageService();
-	Optional<List<Product>> actual = storage.refreshProducts( productDb.list() );
+	Optional<List<Product>> actual = storage.updateProducts( productDb.list() );
 
 	Product expectedOrderProduct1 = new Product( 1, "Roggenvollkornbrot", true );
 	Product expectedOrderProduct2 = new Product( 2, "Mohnbrötchen", false );
@@ -101,7 +101,7 @@ public class StorageServiceTester {
  void putAndGetProductDbEmpty () {
 	ProductDb productDb = new ProductDb();
 	StorageService storage = new StorageService();
-	Optional<List<Product>> actual = storage.refreshProducts( productDb.list() );
+	Optional<List<Product>> actual = storage.updateProducts( productDb.list() );
 	assertTrue( actual.isEmpty() );
  }
 }
