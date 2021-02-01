@@ -105,30 +105,5 @@ public class OrderServiceTest {
  @Test
  void removeOrderByIdInvalid () {
  }
-
- @Test
- void addAndListProduct () {
- }
-
- @Test
- void listProductsEmpty () {
- }
-
- @Test
- void getProductById () {
- }
-
- @Test
- void getProductByIdInvalid () {
-
- }
-
- @Test
- void removeProductById () {
- }
-
- @Test
- void removeProductByIdInvalid () {
- }
 }
 
