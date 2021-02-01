@@ -1,11 +1,9 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.services;
 
 import org.junit.jupiter.api.Test;
 import secondWeek.Ordersystem.db.ProductDb;
 import secondWeek.Ordersystem.model.Order;
 import secondWeek.Ordersystem.model.Product;
-import secondWeek.Ordersystem.services.OrderService;
-import secondWeek.Ordersystem.services.StorageService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +36,7 @@ public class StorageServiceTester {
 	orderService.addOrder( order2 );
 
 	StorageService storage = new StorageService();
-	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() ); // optional
+	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() );
 
 	Product expectedOrder1Product1 = new Product( 1, "Roggenvollkornbrot", true );
 	Product expectedOrder1Product2 = new Product( 2, "Mohnbrötchen", false );

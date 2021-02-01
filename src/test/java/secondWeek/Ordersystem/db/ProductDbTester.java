@@ -1,4 +1,4 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.db;
 
 import org.junit.jupiter.api.Test;
 import secondWeek.Ordersystem.db.ProductDb;
