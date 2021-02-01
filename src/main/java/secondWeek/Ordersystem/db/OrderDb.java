@@ -1,6 +1,7 @@
 package secondWeek.Ordersystem.db;
 
 import secondWeek.Ordersystem.model.Order;
+import secondWeek.Ordersystem.model.Product;
 
 import java.util.*;
 
@@ -32,9 +33,9 @@ public class OrderDb {
 	return Optional.of( list );
  }
 
- public List<Order> list () {
-	Collection val = orderDb.values();
-	return new ArrayList<Order>( val );
+ public Optional<List<Order>> list () {
+	Collection<Order> val = orderDb.values();
+	return val.isEmpty() ? Optional.empty() : Optional.of( new ArrayList<>( val ) );
  }
 
  public void refresh (Optional<List<Order>> orders) {

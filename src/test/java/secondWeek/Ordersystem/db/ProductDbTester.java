@@ -20,25 +20,25 @@ public class ProductDbTester {
 	Product product3 = new Product( 3, "Bauernbrot", false );
 	Product product4 = new Product( 4, "Seelenbrötchen", false );
 
-	ProductDb db = new ProductDb();
-	db.add( product1 );
-	db.add( product2 );
-	db.add( product3 );
-	db.add( product4 );
-	List<Product> actual = db.list();
+	ProductDb productDb = new ProductDb();
+	productDb.add( product1 );
+	productDb.add( product2 );
+	productDb.add( product3 );
+	productDb.add( product4 );
+	Optional<List<Product>> actual = productDb.list();
 
 	List<Product> expected = new ArrayList<Product>();
 	expected.add( new Product( 1, "Roggenvollkornbrot", true ) );
 	expected.add( new Product( 2, "Mohnbrötchen", false ) );
 	expected.add( new Product( 3, "Bauernbrot", false ) );
 	expected.add( new Product( 4, "Seelenbrötchen", false ) );
-	assertEquals( expected, actual );
+	assertEquals( expected, actual.get() );
  }
 
  @Test
  void addAndListEmpty () {
-	ProductDb db = new ProductDb();
-	List<Product> actual = db.list();
+	ProductDb productDb = new ProductDb();
+	Optional<List<Product>> actual = productDb.list();
 	assertTrue( actual.isEmpty() );
  }
 
@@ -80,14 +80,5 @@ public class ProductDbTester {
 	Optional<List<Product>> actual = db.get( 5 );
 	assertTrue( actual.isEmpty() );
  }
-
- @Test
- void refresh () {
-
- }
-
- @Test
- void refreshEmpty () {
-
- }
+ 
 }

@@ -5,6 +5,7 @@ import secondWeek.Ordersystem.db.ProductDb;
 import secondWeek.Ordersystem.model.Order;
 import secondWeek.Ordersystem.model.Product;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,6 +65,8 @@ public class StorageServiceTester {
  void putAndGetOrderDbEmpty () {
 	StorageService storage = new StorageService();
 	OrderService orderService = new OrderService();
+	File file = new File( storage.getOrderDbPath() );
+	file.delete();
 	Optional<List<Order>> actual = storage.updateOrders( orderService.listOrders() );
 	assertTrue( actual.isEmpty() );
  }
@@ -94,14 +97,16 @@ public class StorageServiceTester {
 	expected.add( expectedOrderProduct3 );
 	expected.add( expectedOrderProduct4 );
 
-	assertEquals( expected, actual.get() );
+	assertEquals( actual.get(), expected );
  }
 
  @Test
  void putAndGetProductDbEmpty () {
-	ProductDb productDb = new ProductDb();
 	StorageService storage = new StorageService();
-	Optional<List<Product>> actual = storage.updateProducts( productDb.list() );
+	OrderService orderService = new OrderService();
+	File file = new File( storage.getProductDbPath() );
+	file.delete();
+	Optional<List<Product>> actual = storage.updateProducts( orderService.listProducts() );
 	assertTrue( actual.isEmpty() );
  }
 }

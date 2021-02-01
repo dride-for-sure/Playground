@@ -29,7 +29,7 @@ public class OrderServiceTest {
 	OrderService orderService = new OrderService();
 	orderService.addOrder( order1 );
 	orderService.addOrder( order2 );
-	List<Order> actual = orderService.listOrders();
+	Optional<List<Order>> actual = orderService.listOrders();
 
 	ArrayList<Product> expectedOrder1List = new ArrayList<>();
 	expectedOrder1List.add( new Product( 1, "Roggenvollkornbrot", true ) );
@@ -45,14 +45,14 @@ public class OrderServiceTest {
 	expected.add( expectedOrder1 );
 	expected.add( expectedOrder2 );
 
-	assertEquals( expected, actual );
+	assertEquals( expected, actual.get() );
  }
 
  @Test
  void listOrdersEmpty () {
 	OrderService orderService = new OrderService();
-	List<Order> actual = orderService.listOrders();
-	assertEquals( new ArrayList<Order>(), actual );
+	Optional<List<Order>> actual = orderService.listOrders();
+	assertTrue( actual.isEmpty() );
  }
 
  @Test

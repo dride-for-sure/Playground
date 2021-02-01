@@ -43,7 +43,7 @@ public class OrderService {
 	this.orderDb.refresh( this.storage.updateOrders( this.orderDb.list() ) );
  }
 
- public List<Order> listOrders () {
+ public Optional<List<Order>> listOrders () {
 	return this.orderDb.list();
  }
 
@@ -71,7 +71,7 @@ public class OrderService {
 	this.productDb.refresh( this.storage.updateProducts( this.productDb.list() ) );
  }
 
- public List<Product> listProducts () {
+ public Optional<List<Product>> listProducts () {
 	return this.productDb.list();
  }
 }

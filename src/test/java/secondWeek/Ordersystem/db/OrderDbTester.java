@@ -1,7 +1,6 @@
 package secondWeek.Ordersystem.db;
 
 import org.junit.jupiter.api.Test;
-import secondWeek.Ordersystem.db.OrderDb;
 import secondWeek.Ordersystem.model.Order;
 import secondWeek.Ordersystem.model.Product;
 
@@ -35,7 +34,7 @@ public class OrderDbTester {
 	orderDb.add( order1 );
 	orderDb.add( order2 );
 
-	List<Order> actual = orderDb.list();
+	Optional<List<Order>> actual = orderDb.list();
 
 	ArrayList<Product> expectedOrder1List = new ArrayList<>();
 	expectedOrder1List.add( new Product( 1, "Roggenvollkornbrot", true ) );
@@ -51,15 +50,14 @@ public class OrderDbTester {
 	expected.add( expectedOrder1 );
 	expected.add( expectedOrder2 );
 
-	assertEquals( actual, expected );
+	assertEquals( actual.get(), expected );
  }
 
  @Test
  void addAndGetOrdersEmpty () {
 	OrderDb orderDb = new OrderDb();
-	List<Order> actual = orderDb.list();
-	ArrayList<Order> expected = new ArrayList<>();
-	assertEquals( actual, expected );
+	Optional<List<Order>> actual = orderDb.list();
+	assertTrue( actual.isEmpty() );
  }
 
  @Test
@@ -117,15 +115,5 @@ public class OrderDbTester {
 	Optional<List<Order>> actual = orderDb.get( 3 );
 
 	assertTrue( actual.isEmpty() );
- }
-
- @Test
- void refresh () {
-
- }
-
- @Test
- void refreshEmpty () {
-
  }
 }

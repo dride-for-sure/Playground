@@ -8,13 +8,13 @@ public class Product {
  private String name;
  private int id;
 
+ public Product () {
+ }
+
  public Product (int id, String name, boolean vollkorn) {
 	this.name = name;
 	this.id = id;
 	this.vollkorn = vollkorn;
- }
-
- public Product () {
  }
 
  public int getId () {
@@ -25,20 +25,20 @@ public class Product {
 	return this.name;
  }
 
- public void setVollkorn (boolean vollkorn) {
-	this.vollkorn = vollkorn;
- }
-
- public void setName (String name) {
-	this.name = name;
+ public boolean getVollkorn () {
+	return this.vollkorn;
  }
 
  public void setId (int id) {
 	this.id = id;
  }
 
- public boolean getVollkorn () {
-	return this.vollkorn;
+ public void setName (String name) {
+	this.name = name;
+ }
+
+ public void setVollkorn (boolean vollkorn) {
+	this.vollkorn = vollkorn;
  }
 
  @Override
