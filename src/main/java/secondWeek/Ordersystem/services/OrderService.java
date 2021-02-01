@@ -46,32 +46,4 @@ public class OrderService {
  public Optional<List<Order>> listOrders () {
 	return this.orderDb.list();
  }
-
- public void addProduct (Product product) {
-	this.productDb.add( product );
-	this.productDb.refresh( this.storage.updateProducts( this.productDb.list() ) );
- }
-
- public Optional<List<Product>> getProduct (int id) {
-	Optional<List<Product>> product;
-	try {
-	 product = this.productDb.get( id );
-	 if ( product.isEmpty() ) {
-		throw new Exception( "Order with ID is not available" );
-	 }
-	} catch ( Exception e ) {
-	 System.out.println( e );
-	 return Optional.empty();
-	}
-	return product;
- }
-
- public void removeProduct (int id) {
-	this.productDb.remove( id );
-	this.productDb.refresh( this.storage.updateProducts( this.productDb.list() ) );
- }
-
- public Optional<List<Product>> listProducts () {
-	return this.productDb.list();
- }
 }

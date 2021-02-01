@@ -103,10 +103,10 @@ public class StorageServiceTester {
  @Test
  void putAndGetProductDbEmpty () {
 	StorageService storage = new StorageService();
-	OrderService orderService = new OrderService();
+	ProductService productService = new ProductService();
 	File file = new File( storage.getProductDbPath() );
 	file.delete();
-	Optional<List<Product>> actual = storage.updateProducts( orderService.listProducts() );
+	Optional<List<Product>> actual = storage.updateProducts( productService.listProducts() );
 	assertTrue( actual.isEmpty() );
  }
 }
