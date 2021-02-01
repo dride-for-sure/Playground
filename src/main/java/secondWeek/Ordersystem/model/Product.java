@@ -1,4 +1,4 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.model;
 
 import java.util.Objects;
 
@@ -8,13 +8,13 @@ public class Product {
  private String name;
  private int id;
 
+ public Product () {
+ }
+
  public Product (int id, String name, boolean vollkorn) {
 	this.name = name;
 	this.id = id;
 	this.vollkorn = vollkorn;
- }
-
- public Product () {
  }
 
  public int getId () {
@@ -25,25 +25,25 @@ public class Product {
 	return this.name;
  }
 
- public void setVollkorn (boolean vollkorn) {
-	this.vollkorn = vollkorn;
- }
-
- public void setName (String name) {
-	this.name = name;
+ public boolean getVollkorn () {
+	return this.vollkorn;
  }
 
  public void setId (int id) {
 	this.id = id;
  }
 
- public boolean getVollkorn () {
-	return this.vollkorn;
+ public void setName (String name) {
+	this.name = name;
+ }
+
+ public void setVollkorn (boolean vollkorn) {
+	this.vollkorn = vollkorn;
  }
 
  @Override
  public String toString () {
-	return "Bread{" +
+	return "Buns{" +
 					"vollkorn=" + vollkorn +
 					", name='" + name + '\'' +
 					", id=" + id +
@@ -55,11 +55,11 @@ public class Product {
 	if ( this == o ) return true;
 	if ( o == null || getClass() != o.getClass() ) return false;
 	Product product = (Product) o;
-	return getVollkorn() == product.getVollkorn();
+	return getVollkorn() == product.getVollkorn() && getId() == product.getId() && Objects.equals( getName(), product.getName() );
  }
 
  @Override
  public int hashCode () {
-	return Objects.hash( getVollkorn() );
+	return Objects.hash( getVollkorn(), getName(), getId() );
  }
 }

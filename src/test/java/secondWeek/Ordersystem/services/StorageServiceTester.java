@@ -1,7 +1,11 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.services;
 
 import org.junit.jupiter.api.Test;
+import secondWeek.Ordersystem.db.ProductDb;
+import secondWeek.Ordersystem.model.Product;
+import secondWeek.Ordersystem.model.Order;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +13,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class StorageTester {
+public class StorageServiceTester {
 
  @Test
  void putAndGetOrderDb () {
@@ -32,8 +36,8 @@ public class StorageTester {
 	orderService.addOrder( order1 );
 	orderService.addOrder( order2 );
 
-	Storage storage = new Storage();
-	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() ); // optional
+	StorageService storage = new StorageService();
+	Optional<List<Order>> actual = storage.updateOrders( orderService.listOrders() );
 
 	Product expectedOrder1Product1 = new Product( 1, "Roggenvollkornbrot", true );
 	Product expectedOrder1Product2 = new Product( 2, "Mohnbrötchen", false );
@@ -59,9 +63,11 @@ public class StorageTester {
 
  @Test
  void putAndGetOrderDbEmpty () {
-	Storage storage = new Storage();
+	StorageService storage = new StorageService();
 	OrderService orderService = new OrderService();
-	Optional<List<Order>> actual = storage.refreshOrders( orderService.listOrders() );
+	File file = new File( storage.getOrderDbPath() );
+	file.delete();
+	Optional<List<Order>> actual = storage.updateOrders( orderService.listOrders() );
 	assertTrue( actual.isEmpty() );
  }
 
@@ -77,8 +83,8 @@ public class StorageTester {
 	productDb.add( orderProduct3 );
 	productDb.add( orderProduct4 );
 
-	Storage storage = new Storage();
-	Optional<List<Product>> actual = storage.refreshProducts( productDb.list() );
+	StorageService storage = new StorageService();
+	Optional<List<Product>> actual = storage.updateProducts( productDb.list() );
 
 	Product expectedOrderProduct1 = new Product( 1, "Roggenvollkornbrot", true );
 	Product expectedOrderProduct2 = new Product( 2, "Mohnbrötchen", false );
@@ -91,14 +97,16 @@ public class StorageTester {
 	expected.add( expectedOrderProduct3 );
 	expected.add( expectedOrderProduct4 );
 
-	assertEquals( expected, actual.get() );
+	assertEquals( actual.get(), expected );
  }
 
  @Test
  void putAndGetProductDbEmpty () {
-	ProductDb productDb = new ProductDb();
-	Storage storage = new Storage();
-	Optional<List<Product>> actual = storage.refreshProducts( productDb.list() );
+	StorageService storage = new StorageService();
+	ProductService productService = new ProductService();
+	File file = new File( storage.getProductDbPath() );
+	file.delete();
+	Optional<List<Product>> actual = storage.updateProducts( productService.listProducts() );
 	assertTrue( actual.isEmpty() );
  }
 }

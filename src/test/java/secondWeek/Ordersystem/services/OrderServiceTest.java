@@ -1,6 +1,8 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.services;
 
 import org.junit.jupiter.api.Test;
+import secondWeek.Ordersystem.model.Product;
+import secondWeek.Ordersystem.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class OrderServiceTest {
 	OrderService orderService = new OrderService();
 	orderService.addOrder( order1 );
 	orderService.addOrder( order2 );
-	List<Order> actual = orderService.listOrders();
+	Optional<List<Order>> actual = orderService.listOrders();
 
 	ArrayList<Product> expectedOrder1List = new ArrayList<>();
 	expectedOrder1List.add( new Product( 1, "Roggenvollkornbrot", true ) );
@@ -42,14 +44,14 @@ public class OrderServiceTest {
 	expected.add( expectedOrder1 );
 	expected.add( expectedOrder2 );
 
-	assertEquals( expected, actual );
+	assertEquals( expected, actual.get() );
  }
 
  @Test
  void listOrdersEmpty () {
 	OrderService orderService = new OrderService();
-	List<Order> actual = orderService.listOrders();
-	assertEquals( new ArrayList<Order>(), actual );
+	Optional<List<Order>> actual = orderService.listOrders();
+	assertTrue( actual.isEmpty() );
  }
 
  @Test
@@ -73,11 +75,11 @@ public class OrderServiceTest {
 	productList.add( new Product( 1, "Roggenvollkornbrot", true ) );
 	productList.add( new Product( 2, "Mohnbrötchen", false ) );
 	Order expected = new Order( 1, productList );
-	assertEquals( expected, actual.get().get( 0 ) );
+	assertEquals( actual.get().get( 0 ), expected );
  }
 
  @Test
- void getOrderByIdInavlid () {
+ void getOrderByIdInvalid () {
 	ArrayList<Product> order1List = new ArrayList<>();
 	order1List.add( new Product( 1, "Roggenvollkornbrot", true ) );
 	order1List.add( new Product( 2, "Mohnbrötchen", false ) );
@@ -102,31 +104,6 @@ public class OrderServiceTest {
 
  @Test
  void removeOrderByIdInvalid () {
- }
-
- @Test
- void addAndListProduct () {
- }
-
- @Test
- void listProductsEmpty () {
- }
-
- @Test
- void getProductById () {
- }
-
- @Test
- void getProductByIdInvalid () {
-
- }
-
- @Test
- void removeProductById () {
- }
-
- @Test
- void removeProductByIdInvalid () {
  }
 }
 

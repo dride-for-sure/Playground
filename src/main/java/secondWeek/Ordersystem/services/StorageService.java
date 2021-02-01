@@ -1,39 +1,57 @@
-package secondWeek.Ordersystem;
+package secondWeek.Ordersystem.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import secondWeek.Ordersystem.model.Order;
+import secondWeek.Ordersystem.model.Product;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Storage {
- ObjectMapper objectMapper = new ObjectMapper();
- String orderDbPath = "target/orderDb.json";
- String productDbPath = "target/productDb.json";
+public class StorageService {
+ private ObjectMapper objectMapper = new ObjectMapper();
+ private String orderDbPath = "target/orderDb.json";
+ private String productDbPath = "target/productDb.json";
 
- public Optional<List<Order>> refreshOrders (List<Order> orders) {
+ public Optional<List<Order>> updateOrders (Optional<List<Order>> orders) {
 	this.putOrderDb( orders );
 	return this.getOrderDb();
  }
 
- public Optional<List<Product>> refreshProducts (List<Product> products) {
+ public Optional<List<Product>> updateProducts (Optional<List<Product>> products) {
 	this.putProductDb( products );
 	return this.getProductDb();
  }
 
- private void putOrderDb (List<Order> orders) {
+ public String getOrderDbPath () {
+	return orderDbPath;
+ }
+
+ public String getProductDbPath () {
+	return productDbPath;
+ }
+
+ private void putOrderDb (Optional<List<Order>> orders) {
 	try {
-	 objectMapper.writeValue( new File( orderDbPath ), orders );
+	 if ( orders.isPresent() ) {
+		objectMapper.writeValue( new File( orderDbPath ), orders.get() );
+	 } else {
+		throw new Exception( "Order Database seems to be empty" );
+	 }
 	} catch ( Exception e ) {
 	 System.out.println( "Could not write orderDb" );
 	}
  }
 
- private void putProductDb (List<Product> productDb) {
+ private void putProductDb (Optional<List<Product>> products) {
 	try {
-	 objectMapper.writeValue( new File( productDbPath ), productDb );
+	 if ( products.isPresent() ) {
+		objectMapper.writeValue( new File( productDbPath ), products.get() );
+	 } else {
+		throw new Exception( "Product Database seems to be empty" );
+	 }
 	} catch ( Exception e ) {
 	 System.out.println( "Could not write productDb" );
 	}
